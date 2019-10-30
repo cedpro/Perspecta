@@ -1,0 +1,29 @@
+package com.server;
+
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
+@RestController
+public class ServerController {
+    
+    @RequestMapping("/")
+    public String index() {
+        return getDate();
+    }
+    
+    /**
+     * Method to get UTC server time and return as a response.
+     * @return
+     */
+    private String getDate() {
+		TimeZone tz = TimeZone.getTimeZone("UTC");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd 'T' HH:mm:ss 'Z'");
+		df.setTimeZone(tz);	    	
+    	return df.format(new Date());
+    }
+    
+}
